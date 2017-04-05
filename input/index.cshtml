@@ -1,0 +1,90 @@
+<section class="hero is-medium has-text-centered"> 
+  @Html.Partial("_header")  
+</section>
+
+<hr class="is-marginless">
+
+<section class="section">
+  <div class="container">
+    <h3 class="title is-2">
+      <span class="icon is-medium">
+          <i class="fa fa-th-large"></i>
+        </span>
+        The Jansen/Cabrita<strong> family</strong>
+    </h3>
+    <h4 class="subtitle is-4">A Dutch - Portuguese collaboration</h4>
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-morningsky">
+              <p class="title">Where</p>
+              <p class="subtitle">                
+                We live in Holland in the city of Delft.
+              </p>
+              <figure class="image is-4by4">                
+                <img src="@Context.GetLink("/img/delft.jpg")">
+              </figure>
+            </article>
+            <article class="tile is-child notification is-honey">
+              <p class="title">What</p>
+              <p class="subtitle">We have four people and a cat in our family.</p>
+              <div class="content">
+                <p>Bas is from Holland, Guida is from Portugal and the boys are born in Holland.</p>
+              </div>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-cerulean">
+              <p class="title">Who</p>
+              <p class="subtitle">This is who we are</p>
+              <figure class="image is-4by4">                
+                <img src="@Context.GetLink("/img/emiliotomas.jpg")">
+              </figure>
+              <div class="content">
+                <ul>
+                <li>Bas Jansen, the dad</li>
+                <li>Ana Cabrita also known as Guida, the mom</li>
+                <li>Tomas Jansen, the oldest son</li>
+                <li>Emilio Jansen, the youngest</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-morningsky">
+            <p class="title">Why</p>
+            <p class="subtitle">We just want to let you know who we are and where we live and how to contact us.</p>
+            <div class="content">
+              <p>So if you want contact us send an email to bas or guida @@hipsville.com.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-mist">
+          <p class="title">When</p>
+          <p class="subtitle">It started in 2008</p>
+          <div class="content">
+            <p>It started in 2007 when Guida en Bas met at a winter bbq. It did not work out that night but a few month later we met again and never were apart since.</p>
+            <p>In 2008 Tomas was born on Oosteinde 47.</p>
+            <p>In 2011 Emilio was born also on the Oostsingel soon after we moved to our new house Oostsingel and lived there ever since. Nina our cat joint us a little later.</p>
+          </div>
+          <figure class="image is-4by4">                
+             <img src="@Context.GetLink("/img/guida.jpg")">
+          </figure>
+          <div class="content">
+            <p></p>            
+          </div>
+          <figure class="image is-4by4">                
+             <img src="@Context.GetLink("/img/bas.jpg")">
+          </figure>
+          
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+

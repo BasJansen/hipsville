@@ -1,0 +1,87 @@
+// This example is based on the Static-Site-Samples repository: https://github.com/remotesynth/Static-Site-Samples
+
+// This directive installs packages from NuGet and it what you would normally use
+// NOTE: If running the example against a downloaded version of Wyam, uncomment this line and comment the next line
+#n Wyam.Markdown
+#n Wyam.Razor
+#n Wyam.Yaml
+#n Wyam.Html 
+
+// This directive loads modules directly from the local build and is used for testing
+// NOTE: If running the example against modules built from source, call wyam.exe from the Wyam.Examples.Tests/bin/Debug folder 
+#a **/*
+
+Settings["title"] = "Hipsville";
+Settings["description"] = "Hipsville family site of the Jansen/Cabrita family";
+Settings["banner"] = "/images/about.jpg";
+Settings["menu"] = "Index";
+Settings["MarkdownExtensions"] = "advanced+bootstrap"; 
+Settings["fontawesome"] = "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
+
+// Pipelines.Add("Characters",
+//    ReadFiles("**/*.yaml"),
+//    Yaml()
+// );
+
+// Pipelines.Add("Content",
+// 	ReadFiles("**/*.md"),
+// 	FrontMatter(Yaml()),
+// 	Markdown(),
+// 	Excerpt(),
+// Concat(
+//         ReadFiles("index.cshtml")
+//     ),
+// 	Razor(),
+// 	WriteFiles(".html")
+// );    
+
+public class MyDocument : CustomDocument
+{
+    public string Title { get; set; }
+    public DateTime Published { get; set; }
+    
+    protected override CustomDocument Clone()
+    {
+        return new MyDocument
+        {
+            Title = Title,
+            Published = Published
+        };
+    }
+}
+
+
+public static class MyExtensions
+{
+  public static string ContentFrom(this IEnumerable<IDocument> dc, string name)
+  {  
+    var document = dc.WithFileName(name);    
+    return document?.Content ?? "";
+  }
+
+  public static IDocument WithFileName(this IEnumerable<IDocument> dc, string name)
+  {  
+    var document = dc
+      .Where(doc => String.Equals(doc.Source.FileName.FullPath, name, StringComparison.OrdinalIgnoreCase))
+      .FirstOrDefault();              
+    
+    return document;
+  }
+}   
+
+Pipelines.Add("markdown",
+  ReadFiles("content/*.md"),  
+  FrontMatter(Yaml()),
+  Markdown().UseConfiguration("advanced+bootstrap")  
+);    
+
+Pipelines.Add("Index",
+	ReadFiles("*.cshtml"),
+  FrontMatter(Yaml()),
+	Razor(),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Resources",
+	CopyFiles("**/*{!.cshtml,!.md,!.yaml,}")
+);

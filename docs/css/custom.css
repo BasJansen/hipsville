@@ -1,0 +1,40 @@
+.brand {
+    display: inherit;
+    margin: 0;    
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-family: "Anton", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 5em;
+    font-weight: 700;
+    line-height: normal;
+    color: #fff;    
+}
+
+.hero .nav {
+    box-shadow: none;
+}
+.hero-head2 {
+  background-color: #00d1b2;
+}
+
+.notification.is-morningsky {
+    background-color: #cae4db;
+    color: #000;
+}
+
+.notification.is-honey {
+    background-color: #dcae1d;
+    color: #fff;
+}
+
+.notification.is-cerulean {
+    background-color: #00303f;
+    color: #fff;
+}
+
+.notification.is-mist {
+    background-color: #7a9d96;
+    color: #fff;
+}
+
+
