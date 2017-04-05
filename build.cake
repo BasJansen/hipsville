@@ -9,6 +9,7 @@
 
 var target = Argument("target", "Default");
 var output = DirectoryPath.FromString("./docs");
+var input = DirectoryPath.FromString("./input");
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
@@ -16,19 +17,22 @@ var output = DirectoryPath.FromString("./docs");
 Task("Build")
     .Does(() =>
     {
+        var cname = File(input+"/CNAME");
+        FileWriteText(cname, "www.hipsville.com");
+
         Wyam(new WyamSettings
         {            
             UpdatePackages = true,
             OutputPath = output
         });        
-        
-        var cname = File(output+"/CNAME");
-        FileWriteText(cname, "www.hipsville.com");
     });
     
 Task("Preview")
     .Does(() =>
     {
+        var cname = File(input+"/CNAME");
+        FileWriteText(cname, "www.hipsville.com");
+
         Wyam(new WyamSettings
         {            
             UpdatePackages = false,
@@ -36,9 +40,6 @@ Task("Preview")
             Watch = true,
             OutputPath = output
         });
-
-        var cname = File(output+"/CNAME");
-        FileWriteText(cname, "www.hipsville.com");
     });
 
 //////////////////////////////////////////////////////////////////////
