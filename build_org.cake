@@ -1,8 +1,6 @@
-// The following environment variables need to be set for Publish target:
-// WYAM_GITHUB_TOKEN
-
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.6.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.6.0"
+#tool nuget:?package=Wyam
+#addin nuget:?package=Cake.Wyam
+#addin nuget:?package=Cake.Git
 #addin nuget:?package=Cake.FileHelpers
 
 //////////////////////////////////////////////////////////////////////
@@ -10,47 +8,36 @@
 //////////////////////////////////////////////////////////////////////
 
 var target = Argument("target", "Default");
-
-//////////////////////////////////////////////////////////////////////
-// PREPARATION
-//////////////////////////////////////////////////////////////////////
-
-// Define directories.
 var output = DirectoryPath.FromString("./docs");
 var input = DirectoryPath.FromString("./input");
-
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
-Task("CreateCname")    
+Task("Build")
     .Does(() =>
     {
         var cname = File(input+"/CNAME");
-        FileWriteText(cname, "www.hipsville.com");  
-    });
+        FileWriteText(cname, "www.hipsville.com");
 
-
-Task("Build")    
-    .IsDependentOn("CreateCname")
-    .Does(() =>
-    {        
         Wyam(new WyamSettings
-        {   
+        {            
             UpdatePackages = true,
             OutputPath = output
         });        
     });
     
-Task("Preview")    
-    .IsDependentOn("CreateCname")
+Task("Preview")
     .Does(() =>
     {
+        var cname = File(input+"/CNAME");
+        FileWriteText(cname, "www.hipsville.com");
+
         Wyam(new WyamSettings
         {            
-            UpdatePackages = true,
+            UpdatePackages = false,
             Preview = true,
-            Watch = true,            
+            Watch = true,
             OutputPath = output
         });
     });
@@ -60,7 +47,7 @@ Task("Preview")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build");    
+    .IsDependentOn("Preview");    
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
