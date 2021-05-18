@@ -12,7 +12,7 @@
 #a **/*
 
 Settings["title"] = "Hipsville";
-Settings["description"] = "Hipsville family site of the Jansen/Cabrita family";
+Settings["description"] = "Hipsville";
 Settings["banner"] = "/images/about.jpg";
 Settings["menu"] = "Index";
 Settings["MarkdownExtensions"] = "advanced+bootstrap"; 
